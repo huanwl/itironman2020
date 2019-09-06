@@ -22,7 +22,7 @@
 
 Go官網下載頁網址: https://golang.org/dl/
 
-![2019-09-04 22-18-55 的螢幕擷圖](./image/2019-09-04 22-18-55 的螢幕擷圖.png)
+![2019-09-04 22-18-55 的螢幕擷圖](https://github.com/newnauh/itironman2020/raw/master/image/2019-09-04%2022-18-55%20%E7%9A%84%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96.png)
 
 看到上圖，go支援三種作業系統windows, max, linux，其中windows和mac只要下載檔案並且執行就能完成安裝，而linux就必須要打一些指令。
 
@@ -44,9 +44,9 @@ $  export PATH=$PATH:/usr/local/go/bin
 $  vi $HOME/.profile
 ```
 
-在文件中的最下方加入上面export的那一行就行了，完成後就可以輸入go version和go env看看是否已經安裝成功，如下圖所示:
+在文件中的最下方加入上面export的那一行就行了，完成後就可以輸入go version和go env看看是否已經安裝成功，如下圖所示:https://raw.githubusercontent.com/newnauh/itironman2020/master/image/
 
-![2019-09-04 22-53-57 的螢幕擷圖](./image/2019-09-04 22-53-57 的螢幕擷圖.png)
+![2019-09-04 22-53-57 的螢幕擷圖](https://github.com/newnauh/itironman2020/raw/master/image/2019-09-04%2022-53-57%20%E7%9A%84%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96.png)
 
 go env印出的內容一開始只要注意GOROOT和GOPATH就行了(我目前也只知道這兩個)。GOROOT是Go語言的工具包，像是編譯工具、標準函式庫等等；而GOPATH是開發程式的workspace，通常是在$HOME/go，go開發者希望我們把專案都放在一個固定的地方。
 
@@ -103,12 +103,11 @@ VS Code下載網址: https://code.visualstudio.com/download
 
 下載安裝完後，打開vs code，點選左側工具列的擴充(Extension)，搜尋go並且安裝它，如下圖:
 
-![2019-09-04 23-59-16 的螢幕擷圖](./image/2019-09-04 23-59-16 的螢幕擷圖.png)
+![2019-09-04 23-59-16 的螢幕擷圖](https://github.com/newnauh/itironman2020/raw/master/image/2019-09-04%2023-59-16%20%E7%9A%84%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96.png)
 
 安裝完Go的VS擴充後，可以隨便打開一個go檔案，vs code就會在右下角提示你要裝一些go的工具，一共有11個，安裝完就可以正常開發go程式，並且可以用vs code的中斷點偵錯。工具安裝的過程如下圖所示，此為vs code內建的輸出視窗。
 
-![2019-09-05 00-08-51 的螢幕擷圖](./image/2019-09-05 00-08-51 的螢幕擷圖.png)
-
+![2019-09-05 00-08-51 的螢幕擷圖](https://github.com/newnauh/itironman2020/raw/master/image/2019-09-05%2000-08-51%20%E7%9A%84%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96.png)
 
 
 另外，JetBrains這間專門做IDE(整合開發環境)的公司也有提供Go語言開發的IDE - GoLand，只是它不是免費軟體，但是有30天免費試用期，之後有時間可以來玩玩看。
