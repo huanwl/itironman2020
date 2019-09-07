@@ -16,7 +16,7 @@
 
 
 
-## 環境安裝
+## 安裝Go語言
 
 我覺得下載安裝檔是最快的方式，當然也是可以透過軟體包管理工具進行安裝，像是用windows的chocolatey, mac的homebrew, linux的apt-get或yum，這就看每個人的習慣，只是用軟體包工具安裝的可能不會是目前的最新版本，必須要等待軟體包伺服器更新。
 
@@ -44,8 +44,7 @@ $  export PATH=$PATH:/usr/local/go/bin
 $  vi $HOME/.profile
 ```
 
-在文件中的最下方加入上面export的那一行就行了，完成後就可以輸入go version和go env看看是否已經安裝成功，如下圖所示:https://raw.githubusercontent.com/newnauh/itironman2020/master/image/
-
+在文件中的最下方加入上面export的那一行就行了，完成後就可以輸入go version和go env看看是否已經安裝成功:
 ![2019-09-04 22-53-57 的螢幕擷圖](https://github.com/newnauh/itironman2020/raw/master/image/2019-09-04%2022-53-57%20%E7%9A%84%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96.png)
 
 go env印出的內容一開始只要注意GOROOT和GOPATH就行了(我目前也只知道這兩個)。GOROOT是Go語言的工具包，像是編譯工具、標準函式庫等等；而GOPATH是開發程式的workspace，通常是在$HOME/go，go開發者希望我們把專案都放在一個固定的地方。
@@ -95,13 +94,13 @@ hello, world
 
 
 
-## 編輯器
+## 開發工具
 
-如果要用記事本或是vim寫程式的話，我應該會很痛苦。我身為一名C#開發者，常年使用號稱地表最強IDE的Visual Studio，深深感受到工具對於開發者的重要性。雖然聽說有神人用vim也是很強，但畢竟我只是一般人，是需要工具的輔助。因此，我喜歡用有微軟血統的編輯器Visual Studio Code，不但免費開源、外掛多，更新也很快，許多人也都很推薦。
+如果要用記事本或是vim寫程式的話，我應該會很痛苦。我身為一名C#開發者，常年使用號稱地表最強IDE的Visual Studio，深深感受到工具對於開發者的重要性。雖然聽說有神人用vim也是很強，但畢竟我只是一般人，是需要工具的輔助。因此，我推薦使用同樣是微軟出的編輯器Visual Studio Code，不但免費開源、外掛多，更新也很快，許多人也都很推薦。
 
 VS Code下載網址: https://code.visualstudio.com/download
 
-下載安裝完後，打開vs code，點選左側工具列的擴充(Extension)，搜尋go並且安裝它，如下圖:
+下載安裝完後，打開vs code，點選左側工具列的擴充(Extension)，搜尋go並且安裝它:
 
 ![2019-09-04 23-59-16 的螢幕擷圖](https://github.com/newnauh/itironman2020/raw/master/image/2019-09-04%2023-59-16%20%E7%9A%84%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96.png)
 
@@ -109,10 +108,17 @@ VS Code下載網址: https://code.visualstudio.com/download
 
 ![2019-09-05 00-08-51 的螢幕擷圖](https://github.com/newnauh/itironman2020/raw/master/image/2019-09-05%2000-08-51%20%E7%9A%84%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96.png)
 
+按下F5可以直接執行程式，並且進入偵錯模式:
+
+![2019-09-07 14-36-03 的螢幕擷圖](https://github.com/newnauh/itironman2020/raw/master/image/2019-09-07 14-36-03 的螢幕擷圖.png)
+
+
 
 另外，JetBrains這間專門做IDE(整合開發環境)的公司也有提供Go語言開發的IDE - GoLand，只是它不是免費軟體，但是有30天免費試用期，之後有時間可以來玩玩看。
 
 GoLand: https://www.jetbrains.com/go/
+
+![2019-09-07 14-43-18 的螢幕擷圖](https://github.com/newnauh/itironman2020/raw/master/image/2019-09-07 14-43-18 的螢幕擷圖.png)
 
 
 
