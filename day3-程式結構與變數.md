@@ -159,14 +159,14 @@ var name string = "Iron man"
 
 
 
-由於初始值100本身就是整數，所以在宣告變數時可以省略int型別，這是因為go變數有支援型別推導的功能，和C#的var一樣，從右側的初始值或是一個方法呼叫的回傳值推導出變數型別:
+由於初始值2020本身就是整數，所以在宣告變數時可以省略int型別，這是因為go變數有支援型別推導的功能，和C#的var一樣，從右側的初始值或是一個方法呼叫的回傳值推導出變數型別:
 
 ``` go
 var year = 2020   // int 型別
 var name = "Iron man"   // string 型別
 
 // 多重寫法
-var price, name = 100, "Iron man"
+var price, name = 2020, "Iron man"
 ```
 
 
@@ -178,7 +178,7 @@ year := 2020
 name := "Iron man"
 
 // 多重寫法
-price, name := 100, "Iron man"
+price, name := 2020, "Iron man"
 ```
 
 
@@ -201,7 +201,7 @@ year = 2020
 name = "Iron man"
 
 // 多重寫法
-price, name = 100, "Iron man"
+price, name = 2020, "Iron man"
 ```
 
 

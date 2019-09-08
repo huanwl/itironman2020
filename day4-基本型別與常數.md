@@ -1,0 +1,244 @@
+大家好，今天是鐵人賽第四天，延續昨天的變數，今天要說關於go語言的基本型別，以及常數的用法。由於go是一個強型別的編譯語言，因此了解型別是一件很重要的事。go型別大致上可以區分為基本型別、指標型別，以及其他特殊型別，像是切片、結構、通道..等等的。今天主要是說明基本型別的部份，其餘的型別會在未來的天數中一一談到。
+
+
+
+## 基本型別
+
+基本型別是用於存放最基礎的數據資料，像是一個整數、一段文字，而go語言的基本型別可以分為以下四種:
+
+- 整數
+- 浮點數
+- 布林
+- 字串
+
+### 整數
+
+用來表達沒有小數的數字，可分為兩大類:
+
+- 有符號: int8, int16, int32, int64
+- 無符號: uint8, uint16, uint32, uint64
+
+也可以使用int, uint，這兩個型別會依據平台自動對應上面的其中一個，例如在32位元系統和64位元系統上使用int的長度就會不同。
+
+在C語言有sizeof可以取得變數佔用的記憶體大小，而在go語言也可以透過unsafe.Sizeof()取得記憶體大小，我們來看看以下範例:
+
+``` go 
+// 將 1 左移 7 位元再 - 1 (不 - 1 會錯誤)
+var a int8 = 1<<7 - 1
+fmt.Printf("int8 長度= %d byte, 最大值= %d\n", unsafe.Sizeof(a), a)
+
+// 將 1 左移 8 位元再 - 1 (不 - 1 會錯誤)
+var b uint8 = 1<<8 - 1
+fmt.Printf("uint8 長度= %d byte, 最大值= %d\n", unsafe.Sizeof(b), b)
+```
+
+上面程式碼會印出:
+
+``` bash
+int8 長度= 1 byte, 最大值= 127
+uint8 長度= 1 byte, 最大值= 255
+```
+
+通常一般作業系統都是1byte=8bits，因此int8和uint8都是佔1byte大小，差別是在於int8可接受負整數，並用最左邊的位元來代表正負號，所以說int8的最大值會比uint8小(因為少一個bit)。
+
+整數的最大最小值在標準庫的math包中有提供常數值，像是*math.MinUint8*或*math.MaxUint8*，可以參考[math包官方文件](https://golang.org/pkg/math/#pkg-constants)。
+
+
+
+### 浮點數
+
+用來表達帶有小數的數字，go提供兩種浮點數型別: float32, float64，與int32和int64一樣是用4 bytes和8 bytes大小儲存，但浮點數卻可以表示一個非常大或非常小的數。因為浮點數都是採用IEEE 754標準，以科學記數法來儲存數值，但是這樣就會有精準度的問題。
+
+浮點數的儲存方式非常複雜，有興趣可以看這篇[浮點數的記憶體儲存](https://www.itread01.com/content/1543589824.html)，我只看懂了一半，真的是以前計概不用功的下場...
+
+一樣來舉個簡單的範例，用unsafe.Sizeof()看看佔用的記憶體大小:
+
+``` go
+var a float32 = math.MaxFloat32
+fmt.Printf("float32 長度= %d byte\n最大值(科學記號法)= %e\n最大值(十進制)= %f\n\n",
+					 unsafe.Sizeof(a), a, a)
+
+var b float64 = math.MaxFloat64
+fmt.Printf("float64 長度= %d byte\n最大值(科學記號法)= %e\n最大值(十進制)= %f\n\n",
+			 		  unsafe.Sizeof(b), b, b)
+```
+
+上面程式碼會印出:
+
+``` bath
+float32 長度= 4 byte
+最大值(科學記號法)= 3.402823e+38
+最大值(十進制)= 340282346638528859811704183484516925440.000000
+
+float64 長度= 8 byte
+最大值(科學記號法)= 1.797693e+308
+最大值(十進制)= 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.000000
+```
+
+這次的範例直接拿math包的float最大值來用，分別印出長度與大小值，而浮點數值除了使用一般十進制(%f)印出，也可以用科學記數法(%e)印出。
+
+另外，go語言還有提供兩個複數型別complex64, complex128，但是複數在應用上是滿少見的，
+
+
+
+### 布林
+
+用來表達真假值true/false，使用bool來宣告:
+
+``` go
+var a bool
+fmt.Println(a)
+// 印出: false
+```
+
+
+
+
+
+### 字串
+
+用來表達文字，使用string來宣告:
+
+
+
+## 型別的別名(Type Alias)
+
+go可以對任何一個型別定義別名，而別名就像是一個外號，本質上還是同一型別。別名只存在於編譯期間，進入執行期間就會回到原始型別。
+
+格式:  type  [別名]  =  [型別] 
+
+``` go
+// 定義一個 int 的別名叫做 myInt
+type  myInt = int
+```
+
+而go語言本身也有定義的型別別名:
+
+``` go
+type byte = uint8
+type rune = int32
+```
+
+從上面可以看到其實byte是uint8、rune是int32，通過定義別名方式獲得新的型別，這樣可以用於一些特別的需求，提高程式碼可讀性以及型別安全。
+
+我們可以用格式化輸出型別(%T)來看看別名的原始型別:
+
+``` go
+type IntAlias = int
+
+var a byte
+fmt.Printf("%T \n", a)
+
+var b rune
+fmt.Printf("%T \n", b)
+
+var c IntAlias
+fmt.Printf("%T \n", c)
+```
+
+上面程式碼會印出:
+
+``` bash
+uint8 
+int32 
+int 
+```
+
+因此，我們可以看到在程式的執行期間，別名就會被改成原始型別。
+
+另外要注意的是，千萬不要少加一個等號，意義完全不同，會變成定義一個新的型別:
+
+``` go
+type NewInt int
+
+var a NewInt
+
+fmt.Printf("%T \n", a)
+// 印出: main.NewInt 
+```
+
+因為type關鍵字本身就是用於定義型別，像是結構、介面也是要用type定義，別名的語法必須加上等號( = )來區分這是在定義別名，而不是新的型別。
+
+
+
+## 常數宣告
+
+常數是指在開發或編譯期間就定義好的值，在執行期間不能被修改。go常數的用法就和變數差不多，只是把關鍵字 *var* 換 *const* 。
+
+格式:  const  [常數名稱]  =  [常數值] 
+
+```go
+// 單一宣告
+const pi = 3.141592
+const e = 2.718281
+
+// 多重宣告 
+const (
+    pi = 3.141592
+	e = 2.718281
+)
+```
+
+常數可以用表達式指定內容，以及在陣列宣告時指定大小:
+
+```go
+const pageSize = 5
+const totalPage = 20
+const totalSize = pageSize * totalPage
+
+var arr [totalSize]int
+
+fmt.Println(len(arr))
+//印出: 100
+```
+
+
+
+## 列舉常數
+
+go語言中沒有定義列舉(enum)的功能，但是可以用常數和iota關鍵字達到相似的效果。
+
+``` go
+// 先定義一個int別名的型別Hero
+type Hero int
+
+const (
+    IronMan Hero = iota
+    DrStrange
+    Thor
+    Hulk
+)
+
+// 使用列舉常數賦值
+man := IronMan
+
+fmt.Println(IronMan, DrStrange, Thor, Hulk, man)
+// 印出: 0 1 2 3 1
+```
+
+iota關鍵字是一個常數計數器，第一個常數從 0 開始，往下逐漸的累加。而iota也可以加入表達式，不一定都要從0開始，或是每次只加一，如下所示:
+
+``` go
+type Hero int
+
+const (
+    IronMan Hero = iota + 1
+    DrStrange
+    Thor
+    Hulk
+)
+
+fmt.Println(IronMan, DrStrange, Thor, Hulk)
+// 印出: 1 2 3 4
+```
+
+
+
+## 小結
+
+
+
+## 參考來源
+
+1. https://michaelchen.tech/golang-programming/data-type/
+2. http://golang-zhtw.netdpi.net/03_types/03-01_numbers
