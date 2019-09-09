@@ -1,4 +1,4 @@
-大家好，今天是鐵人賽第四天，我要來講go語言的基本型別，以及常數的用法。由於go是一個強型別的語言，因此了解型別是一件很重要的事。go型別大致上可以區分為基本型別、指標型別，以及其他特殊型別，像是切片、結構、通道..等等。今天主要是說明基本型別的部份，其餘的型別會在未來的天數中一一談到。
+大家好，今天是鐵人賽第四天，我要來講go語言的基本型別。由於go是一個強型別的語言，因此了解型別是一件很重要的事。go型別大致上可以區分為基本型別、指標型別，以及其他特殊型別，像是切片、結構、通道..等等。今天主要是說明基本型別的部份，其餘的型別會在未來的天數中一一談到。
 
 
 
@@ -238,79 +238,6 @@ fmt.Printf("%T \n", a)
 ```
 
 因為type關鍵字本身就是用於定義型別，像是結構、介面也是要用type定義，別名的語法必須加上等號( = )來區分這是在定義別名，而不是新的型別。
-
-
-
-## 常數宣告
-
-常數是指在開發或編譯期間就定義好的值，在執行期間不能被修改。go常數的用法就和變數差不多，只是把關鍵字 *var* 換 *const* 。
-
-格式:  const  [常數名稱]  =  [常數值] 
-
-```go
-// 單一宣告
-const pi = 3.141592
-const e = 2.718281
-
-// 多重宣告 
-const (
-    pi = 3.141592
-	e = 2.718281
-)
-```
-
-常數可以用表達式指定內容，以及在陣列宣告時指定大小:
-
-```go
-const pageSize = 5
-const totalPage = 20
-const totalSize = pageSize * totalPage
-
-var arr [totalSize]int
-
-fmt.Println(len(arr))
-//印出: 100
-```
-
-
-
-## 列舉常數
-
-go語言中沒有定義列舉(enum)的功能，但是可以用常數和iota關鍵字達到相似的效果。
-
-``` go
-// 先定義一個int別名的型別Hero
-type Hero int
-
-const (
-    IronMan Hero = iota
-    DrStrange
-    Thor
-    Hulk
-)
-
-// 使用列舉常數賦值
-man := IronMan
-
-fmt.Println(IronMan, DrStrange, Thor, Hulk, man)
-// 印出: 0 1 2 3 1
-```
-
-iota關鍵字是一個常數計數器，第一個常數從 0 開始，往下逐漸的累加。而iota也可以加入表達式，不一定都要從0開始，或是每次只加一，如下所示:
-
-``` go
-type Hero int
-
-const (
-    IronMan Hero = iota + 1
-    DrStrange
-    Thor
-    Hulk
-)
-
-fmt.Println(IronMan, DrStrange, Thor, Hulk)
-// 印出: 1 2 3 4
-```
 
 
 
