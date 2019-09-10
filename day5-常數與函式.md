@@ -63,14 +63,14 @@ iota關鍵字是一個常數計數器，第一個常數從 0 開始，往下逐�
 type Hero int
 
 const (
-    IronMan Hero = iota + 1
+    IronMan Hero = iota*2 + 1
     DrStrange
     Thor
     Hulk
-)重用性與模組性
+)
 
 fmt.Println(IronMan, DrStrange, Thor, Hulk)
-// 印出: 1 2 3 4
+// 印出: 1 3 5 7
 ```
 
 
@@ -100,8 +100,6 @@ func main() {
 
 從上面的範例可以看到，作為程式進入點的main也是一個函式，我們稱作為主函式，它通常是在程式啟動時被runtime(執行環境)呼叫。而當程式進入主函式之後，我們呼叫了foo函式，取得一段回傳的字串，然後印出。
 
-
-
 go函式的回傳值可宣告多個，但要用小括號( )包起來，在函式呼叫的左側就必須放上相同數量的變數:
 
 ``` go
@@ -116,7 +114,7 @@ func main() {
 }
 ```
 
-也可以忽略掉部份的回傳值，用底線( _ )替代變數:
+不想全部都要的話，也是可以忽略掉部份回傳值，用底線( _ )替代變數:
 
 ``` go
 _, a := foo(2020, "Iron Man")
@@ -208,7 +206,7 @@ panic: runtime error: invalid memory address or nil pointer dereference
 [signal SIGSEGV: segmentation violation code=0x1 addr=0x0 pc=0x48e554]
 ```
 
-這個錯誤簡單來說就是，使用的記憶體位置(變數)沒有定義預期的資料。
+這個錯誤簡單來說，就是使用的記憶體位置(變數)沒有定義預期的資料。
 
 
 
