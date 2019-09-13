@@ -6,11 +6,11 @@
 
 # 指標
 
-指標主要是用來操作記憶體空間，透過直接存取記憶體位址的方式來修改資料，取代資料搬移的動作，使程式擁有較高的執行效能。
+指標(Pointer)主要是用來操作記憶體空間，可以透過記憶體位址直接存取資料，取代資料搬移和複製的動作，使程式擁有較高的執行效能。
 
 ## 指標變數
 
-指標是一個指向記憶體位址(memory address)的變數，這也意味著指標也是一種型別，就和函式變數一樣，可以當作變數的都是一種型別，因此我們可以宣告一個指標變數，如下:
+指標通常指的是，一個指向記憶體位址(memory address)的變數，而這也意味著指標是一種型別，就和函式變數一樣，可以當作變數使用的都是一種型別，因此我們可以宣告一個指標變數，如下:
 
 ``` go
 var ptr *string  // 宣告一個指向字串的指標變數ptr
@@ -56,6 +56,10 @@ $  go run ./main.go
 ./main.go:14:6: cannot use &str (type *string) as type *int in assignment
 ```
 
+最後，因為考量安全問題，go語言不支援指標運算，詳細說法可以參考go官網的FAQ:
+
+[Why is there no pointer arithmetic?](https://golang.org/doc/faq#no_pointer_arithmetic)。
+
 
 
 ## 指標與函式
@@ -94,7 +98,7 @@ func main() {
 
 
 
-## new()
+## new( )
 
 Go語言提供了一種方法，可以動態產生一個變數空間，如下:
 
@@ -113,3 +117,9 @@ fmt.Printf("%s \n", *ptr)  // 印出: Iron Man
 # 小結
 
 今天簡單說明了指標的概念，以及go語言的指標用法。從我離開學校後就再也碰過指標了，現在要開始回想以前學過的東西。明天預計會說明陣列的部份，因為陣列其實也是一種指標，比較特別的是它指向一段連續的記憶體空間。
+
+
+
+# 參考
+
+1. https://stackoverflow.com/questions/32700999/pointer-arithmetic-in-go
