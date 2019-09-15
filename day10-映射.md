@@ -136,6 +136,51 @@ fmt.Printf("len=%d, value=%v \n", len(ageOfHeros), ageOfHeros)
 
 
 
+## 映射與函式
+
+我們在day5有提過go語言的函式也是一種型別，可以當作變數使用。因此，我們也可以把函式放到映射裡，感覺很像是Javascript裡的物件(object)，只是在go語言必須定義型別。下面舉一個加減乘除的範例:
+
+```go
+// 建立一個接收兩個整數及回傳一個字串的函式映射容器
+var operation = make(map[string]func(a, b int) int)
+
+// 新增加法
+operation["add"] = func(a, b int) int {
+    return a + b
+}
+
+// 新增減法
+operation["minus"] = func(a, b int) int {
+    return a - b
+}
+
+// 新增乘法
+operation["multiply"] = func(a, b int) int {
+    return a * b
+}
+
+// 新增除法
+operation["divide"] = func(a, b int) int {
+    return a / b
+}
+
+// 執行所有映射元素，
+for k, v := range operation {
+    fmt.Printf("%s(1,2) = %d \n", k, v(1, 2))
+}
+```
+
+執行結果:
+
+```bash
+add(1,2) = 3 
+minus(1,2) = -1 
+multiply(1,2) = 2 
+divide(1,2) = 0 
+```
+
+
+
  # 小結
 
 今天介紹了go語言的映射用法，這種資料結構在很多語言都有被實作，像是C#的Dictionary。而使用映射的目的，除了能表達複雜形式的資料(ex: JSON)外，也可以提高查詢效能，像是快取資料通常也是基於映射的資料結構。
