@@ -8,7 +8,7 @@
 
 ``` go
 // 宣告字串陣列，並且初始化 5 個英雄名稱
-arr := [5]string{"Iron Man", "Dr.Stange", "Thor", "Captain America", "Hulk"}
+arr := [5]string{"Iron Man", "Dr.Strange", "Thor", "Captain America", "Hulk"}
 
 // 建立字串切片，並且取得arr陣列的第 1 個到第 3 個元素
 slice := arr[1:4]
@@ -22,7 +22,7 @@ for k, v := range slice {
 執行結果:
 
 ``` bash
-0 Dr.Stange
+0 Dr.Strange
 1 Thor
 2 Captain America
 ```
@@ -32,7 +32,7 @@ for k, v := range slice {
 當我們對切片修改資料時，也會修改原始陣列的資料，因為資料是同一份。下面的範例中，我們嘗試把切片裡的幾個漫威英雄改成DC英雄，然後印出原始陣列:
 
 ``` go
-arr := [5]string{"Iron Man", "Dr.Stange", "Thor", "Captain America", "Hulk"}
+arr := [5]string{"Iron Man", "Dr.Strange", "Thor", "Captain America", "Hulk"}
 
 slice := arr[1:4]
 slice[0] = "Bat Man"
@@ -90,8 +90,8 @@ func printHeros(slice []string) {
 執行結果:
 
 ``` bash
-[0]Iron Man, [1]Dr.Stange, [2]Thor, [3]Captain America, [4]Hulk, 
-[0]Iron Man, [1]Dr.Stange, 
+[0]Iron Man, [1]Dr.Strange, [2]Thor, [3]Captain America, [4]Hulk, 
+[0]Iron Man, [1]Dr.Strange, 
 [0]Thor, [1]Captain America, [2]Hulk, 
 ```
 
@@ -110,7 +110,7 @@ func printHeros(slice []string) {
 
 ``` go 
 func main() {
-	arr := [5]string{"Iron Man", "Dr.Stange", "Thor", "Captain America", "Hulk"}
+	arr := [5]string{"Iron Man", "Dr.Strange", "Thor", "Captain America", "Hulk"}
 
     // 從arr切出[1:]，長度少1，容量少1
 	slice := arr[1:]
@@ -142,7 +142,7 @@ func printHeros(slice []string) {
 執行結果:
 
 ``` bash
-len=4, cap=4, value=[0]Dr.Stange, [1]Thor, [2]Captain America, [3]Hulk, 
+len=4, cap=4, value=[0]Dr.Strange, [1]Thor, [2]Captain America, [3]Hulk, 
 len=3, cap=3, value=[0]Thor, [1]Captain America, [2]Hulk, 
 len=2, cap=2, value=[0]Captain America, [1]Hulk, 
 len=1, cap=2, value=[0]Captain America, 
@@ -154,7 +154,7 @@ len=1, cap=2, value=[0]Captain America,
 
 ## 切片宣告
 
-切片除了可以從一個現有的陣列或切片生成，也可以直接宣告一個新的切片。宣告切片同時也會產生一個新的陣列，位於切片的底層，陣列長度取決於初始化的內容，如下:
+切片除了可以從現有的陣列或切片生成，也可以直接宣告一個新的切片，預設值為 `nil`。若宣告有指定初始值，就會產生一個新的陣列，位於切片底層，陣列長度取決於初始化內容，如下:
 
 ```go
 // 宣告一個字串切片
@@ -165,11 +165,11 @@ fmt.Printf("len=%d, cap=%d, values=%v \n", len(strSlice), cap(strSlice), strSlic
 var intSlice []int
 fmt.Printf("len=%d, cap=%d, values=%v \n", len(intSlice), cap(intSlice), strSlice)
 
-// 宣告並初始化一個字串切片
+// 宣告與初始化一個字串切片
 strSlice2 := []string{"Iron Man"}
 fmt.Printf("len=%d, cap=%d, values=%v \n", len(strSlice2), cap(strSlice2), strSlice2)
 
-// 宣告並初始化一個整數切片
+// 宣告與初始化一個整數切片
 intSlice2 := []int{2019, 2020}
 fmt.Printf("len=%d, cap=%d, values=%v \n", len(intSlice2), cap(intSlice2), intSlice2)
 ```

@@ -58,7 +58,7 @@ $  go run ./main.go
 
 最後，因為考量安全問題，go語言不支援指標運算，詳細說法可以參考go官網的FAQ:
 
-[Why is there no pointer arithmetic?](https://golang.org/doc/faq#no_pointer_arithmetic)。
+[Why is there no pointer arithmetic?](https://golang.org/doc/faq#no_pointer_arithmetic)
 
 
 
