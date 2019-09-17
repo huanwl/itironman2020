@@ -6,7 +6,7 @@ FAQ: [Is Go an object-oriented language?](https://golang.org/doc/faq#Is_Go_an_ob
 
 
 
-# 結構
+# 結構(Struct)
 
 疑？上面講了這麼多物件導向，怎麼今天不是應該要講類別(class)嗎？事實上，go語言沒有類別，只有結構(struct)，這又是一個從C語言來的東西，只是go的結構強大很多。
 
@@ -172,3 +172,4 @@ fmt.Println(*stephen)
 # 小結
 
 今天大概介紹結構的基本用法，明天還會繼續說明結構的其他用法。結構算是Go語言中最複雜的資料類型，需要分個好幾天才能說完它。今天就先到這裡了，明天見。
+
