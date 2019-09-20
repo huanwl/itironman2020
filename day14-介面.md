@@ -84,10 +84,10 @@ func (s *SmsSender) Send(content string) {}
 func main() {
 	var sender MessageSender
 
-	sender = &EmailSender{Address: "test@gmail.com"}
+	sender = &EmailSender{}
 	describe(sender)
 
-	sender = &SmsSender{Mobile: "0900000000"}
+	sender = &SmsSender{}
 	describe(sender)
 }
 
@@ -99,8 +99,8 @@ func describe(i MessageSender) {
 執行結果:
 
 ```bash
-(&{test@gmail.com}, *main.EmailSender)
-(&{0900000000}, *main.SmsSender)
+(&{}, *main.EmailSender)
+(&{}, *main.SmsSender)
 ```
 
 從執行結果可以看出，介面變數的型別會是包含的結構的型別。因此，我們可以認定介面是一種特別的變數，它的值和型別都是依據其包含的結構實體。
