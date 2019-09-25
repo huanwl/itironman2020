@@ -30,7 +30,7 @@ defer end
 
 
 
-#＃ panic
+## panic
 
 使用 panic 會直接造成系統崩潰、服務中斷，就像是 Java/C# 中的 `throw exception` ，如下：
 
