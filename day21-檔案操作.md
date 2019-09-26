@@ -4,7 +4,7 @@
 
 # ioutil 套件
 
-ioutil 套件被意義在 `io/ioutil` 目錄下，下面的範例是讀取一個目錄下的所有檔案：
+ioutil 套件是最簡單的檔案操作方式，定義在 `io/ioutil` 目錄下，範例如下：
 
 ```go
 package main
@@ -14,30 +14,56 @@ import (
 	"io/ioutil"
 )
 
-func check(e error) {
-	if e != nil {
-		panic(e)
-	}
-}
-
 func main() {
-	const dirName string = "/home/username/dir"
+    // 宣告檔案路徑
+	const fileName string = "/dir/filename"
 
-	fileInfos, err := ioutil.ReadDir(dirName)
-	check(err)
-
-	for _, item := range fileInfos {
-		content := readFile(dirName + item.Name())
-		fmt.Println(content)
+    // 讀取檔案所有內容
+	dat, err := ioutil.ReadFile(fileName)
+	if err != nil {
+		panic(err)
 	}
 
-}
-
-func readFile(fileName string) string {
-	dat, err := ioutil.ReadFile(fileName)
-	check(err)
-    
-	return string(dat)
+	fmt.Println(string(dat))
 }
 ```
 
+
+
+# OS套件
+
+如果想要對檔案做比較細部的操作，可以使用 os 套件來操作，它允許我們先開啟一個檔案，然後再執行一連串的操作，如下：
+
+```go
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+    // 宣告檔案路徑
+    const fileName string = "/dir/filename"
+    
+    // 開啟一個檔案
+	f, err := os.Open(fileName)
+	if err != nil {
+		panic(err)
+	}
+
+    // 建立一個Buffer
+	b := make([]byte, 2)
+    
+    // 開始讀檔
+	n, _ := f.Read(b)
+	for n > 0 {
+		fmt.Printf("%d\n%s\n", n, b)
+		n, _ = f.Read(b)
+	}
+}
+```
+
+
+
+# 參考
+
+1. https://gobyexample.com/reading-files
