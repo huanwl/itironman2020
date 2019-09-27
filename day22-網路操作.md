@@ -93,3 +93,7 @@ Sec-Fetch-Mode: navigate
 
 
 
+# 參考
+
+1. https://gobyexample.com/http-clients
+2. https://gobyexample.com/http-servers
