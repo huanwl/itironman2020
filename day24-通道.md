@@ -108,7 +108,11 @@ func main() {
 
 在通道接收資料時，一次只能接收一個值，如果有多個goroutine就要接收多次通道。
 
-因此，也可以用 `for` 循環接收通道值：
+
+
+## 循環接收
+
+除了用 `x := <-c` 方式接收資料外，也可以用 `for range` 循環接收多筆資料：
 
 ```go
 for data := range c {
@@ -116,4 +120,35 @@ for data := range c {
 }
 ```
 
-但是必須要自己判斷退出的條件，例如用一個 `count` 變數來紀錄收到多少資料。
+這個作法是用在一個goroutine傳送多筆資料給通道時，並在資料送完時用 `close(c)` 關閉通道，告訴 range 必須結束迴圈，範例如下：
+
+```go
+// 定義一個整數平方的函式
+func square(s []int, c chan int) {
+	for _, v := range s {
+		c <- v * v
+	}
+	close(c) // 關閉通道，告訴 range 結束迴圈
+}
+
+func main() {
+	s := []int{1, 2, 3, 4, 5, 6}
+
+	c := make(chan int)
+	go square(s, c)
+
+	for data := range c {
+		fmt.Println(data)
+	}
+}
+
+/* 執行結果：
+1
+4
+9
+16
+25
+36
+*/
+```
+
