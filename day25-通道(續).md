@@ -69,3 +69,104 @@ func main() {
 */
 ```
 
+
+
+## 多通道處理
+
+goroutine之間是可以用多個通道來溝通，只是這樣做會變得更複雜。Go語言提供一種專門處理多通道的語法 - `select` 關鍵字。
+
+`select` 語法非常像 `switch`，執行時會選擇一個不會阻塞的 `case` 操作，如果都會阻塞就執行`default`，如果有多個 `case` 不會阻塞就會隨機執行其中一個：
+
+```go
+select {
+    case 通道操作1:
+    	// 對應的行為
+    case 通道操作2:
+    	// 對應的行為
+    default:
+    	// 通道阻塞的情況
+}
+```
+
+下面範例是計算費式數列的程式，fibonaccis 函式會不停地計算並傳送結果，直到接收到停止訊號，如下：
+
+```go
+func fibonacci(c, quit chan int) {
+	x, y := 0, 1
+	for {
+		select {
+		case c <- x:         // 發送計算結果
+			x, y = y, x+y
+		case <-quit:       // 接收停止訊號
+			fmt.Println("quit")
+			return
+		}
+	}
+}
+
+func main() {
+	c := make(chan int)
+	quit := make(chan int)
+	go func() {
+		for i := 0; i < 10; i++ {
+			fmt.Println(<-c)  // 接收計算結果
+		}
+		quit <- 0                     // 發送停止訊號
+	}()
+	fibonacci(c, quit)
+}
+
+/* 執行結果：
+0
+1
+1
+2
+3
+5
+8
+13
+21
+34
+quit
+*/
+```
+
+另外，如果有設定 `default` 就會在所有 `case` 都阻塞的情況下執行。
+
+下面範例是設定兩個時間通道，一個是每100毫秒持續通知，另一個是500毫秒後通知一次，當兩個通道都沒回應時，會進入default：
+
+```go
+func main() {
+	tick := time.Tick(100 * time.Millisecond)        // 建立一個每100毫秒持續通知的時間通道
+	boom := time.After(500 * time.Millisecond)  // 建立一個500毫秒後通知一次的時間通道
+	for {
+		select {
+		case <-tick:
+			fmt.Println("tick.")
+		case <-boom:
+			fmt.Println("BOOM!")
+			return                                                                     // 結束goroutine
+		default:
+			fmt.Println("    .")
+			time.Sleep(100 * time.Millisecond)           // 延遲100毫秒
+		}
+	}
+}
+
+/* 執行結果：
+    .
+tick.
+    .
+tick.
+    .
+tick.
+    .
+tick.
+    .
+tick.
+BOOM!
+*/
+```
+
+
+
