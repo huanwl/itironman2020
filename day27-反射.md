@@ -53,7 +53,7 @@ N: myIntSlice K: slice
 
 ## 種類(Kind)
 
-相較 `Type` 而言，`Kind` 是固定的而且不能自訂新增，所以在 `reflect` 套件中是以[列舉常數](https://ithelp.ithome.com.tw/articles/10214694)來定義，如下：(https://golang.org/pkg/reflect/#Kind)
+相較 `Type` 而言，`Kind` 是固定的而且不能自訂新增，所以在 `reflect` 套件中是以[列舉常數](https://ithelp.ithome.com.tw/articles/10214694)來定義，如下：
 
 ```go
 type Kind uint
